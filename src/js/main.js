@@ -63,7 +63,7 @@ function init() {
   document.querySelector('.left.sort.image').addEventListener('click', () => pick('left'));
   document.querySelector('.right.sort.image').addEventListener('click', () => pick('right'));
   
-  document.querySelector('.sorting.tie.button').addEventListener('click', () => pick('tie'));
+ /*  document.querySelector('.sorting.tie.button').addEventListener('click', () => pick('tie')); */
   document.querySelector('.sorting.undo.button').addEventListener('click', undo);
   document.querySelector('.sorting.save.button').addEventListener('click', () => saveProgress('Progress'));
   
