@@ -464,7 +464,25 @@ dataSet[dataSetVersion].characterData = [
     opts: {
       series: [ "XVV" ]
     }
+  },
+  
+           {
+    name: "Shizuku",
+    img: "pdgRa3J.png",
+    opts: {
+      series: [ "XVV" ]
+    }
+  },
+  
+             {
+    name: "Reika",
+    img: "S9xxxdI.png",
+    opts: {
+      series: [ "XVV" ]
+    }
   }
+  
+  
   
   
   
