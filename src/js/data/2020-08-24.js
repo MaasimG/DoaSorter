@@ -131,7 +131,7 @@ dataSet[dataSetVersion].characterData = [
       series: [ "DOA" ]
     }
   },
-  {
+/*   {
     name: "Christie",
     img: "Q3sHcsy.png",
     opts: {
@@ -144,7 +144,7 @@ dataSet[dataSetVersion].characterData = [
     opts: {
       series: [ "DOA", "XVV" ]
     }
-  },
+  }, */
   {
     name: "Kokoro",
     img: "LZX0aGZ.png",
