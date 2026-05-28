@@ -1,90 +1,120 @@
-<html>
+<html lang="en">
 
 <head>
   <link rel="shortcut icon" href="src/assets/Dead_or_Alive.png" type="image/x-icon">
   <link rel="icon" href="src/assets/Dead_or_Alive.png" type="image/x-icon">
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="og:site_name" content="Dead or Alive Character Sorting">
   <meta name="og:description" content="A simple website for sorting Dead or Alive characters in a formatted list.">
   <meta name="og:image" content="">
   <title>Dead or Alive Character Sorting</title>
 
   <link rel="stylesheet" type="text/css" href="src/css/reset.css">
-  <link rel="stylesheet" type="text/css" href="src/css/styles.css">
+  <link rel="stylesheet" type="text/css" href="src/css/styles.css?v=20260528a">
 
   <script src="src/js/data.js"></script>
-  <script src="src/js/data/2020-08-24.js"></script>
+  <script src="src/js/data/2020-08-24.js?v=20260528a"></script>
 
   <script src="src/js/html2canvas.min.js"></script>
   <script src="src/js/lz-string.min.js"></script>
   <script src="src/js/seedrandom.min.js"></script>
-  <script src="src/js/main.js"></script>
+  <script src="src/js/main.js?v=20260528a"></script>
 </head>
 
 <body>
-<div class="container">
+<div class="page">
+  <header class="site-nav" id="home">
+    <a class="brand" href="#home" aria-label="Dead or Alive Sorter home">
+      <img src="src/assets/Dead_or_Alive.png" alt="">
+      <span class="brand-copy">
+        <strong>DOA <em>Sorter</em></strong>
+        <small>Summer Splash</small>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#sorter">Sorter</a>
+      <a href="#characters">Characters</a>
+      <a href="#about">About</a>
+      <a href="#updates">Updates <span>New</span></a>
+    </nav>
+    <a class="tool-link" href="#characters">DOAXVV Fansite Tool</a>
+  </header>
 
+  <main class="container" id="sorter">
     <div class="progress">
-        <span class="progressbattle"></span>
-        <div class="progressbar">
-            <div class="progressfill"><span class="progresstext"></span></div>
-        </div>
+      <span class="progressbattle"></span>
+      <div class="progressbar">
+        <div class="progressfill"><span class="progresstext"></span></div>
+      </div>
     </div>
 
     <div class="sorter">
-        <img src="src/assets/defaultL.jpg" class="left sort image">
+      <div class="hero-copy">
+        <p class="script-title">Dead or Alive</p>
+        <h1><span>Character</span><span>Sorter</span></h1>
+        <p class="edition">Summer Splash Edition</p>
+        <p class="hero-text">Sort your favorite DOA and DOAXVV characters to find out who stands above the rest.</p>
+      </div>
 
-        <div class="starting start button">Dead or Alive Character Sorter<br><br>Click to Start!</div>
-        <div class="starting load button">Load <span></span></div>
+      <div class="bubble-note bubble-note-left">Pick Your Fave!</div>
+      <div class="bubble-note bubble-note-right">Who's Your Top?</div>
 
-        <div class="loading button"><div></div><span>Loading...</span></div>
+      <img src="src/assets/hero-misaki.png" alt="Misaki" class="left sort image" referrerpolicy="no-referrer">
+
+      <div class="starting start button">Start Sorting</div>
+      <div class="starting load button">Load <span></span></div>
+
+      <div class="loading button"><div></div><span>Loading...</span></div>
 
       <!--   <div class="sorting tie button">Tie</div> -->
-        <div class="sorting undo button">Undo</div>
-        <div class="sorting save button">Save Progress</div>
+      <div class="sorting undo button">Undo</div>
+      <div class="sorting save button">Save Progress</div>
 
-        <div class="finished save button">Generate Result URL</div>
-        <div class="finished getimg button">Generate Image</div>
-        <div class="finished list button">Generate Text List</div>
+      <div class="finished save button">Generate Result URL</div>
+      <div class="finished getimg button">Save Result Picture</div>
+      <div class="finished list button">Generate Text List</div>
 
-        <img src="src/assets/defaultR.jpg" class="right sort image">
+      <img src="src/assets/hero-marie-rose.png" alt="Marie Rose" class="right sort image" referrerpolicy="no-referrer">
 
-        <div class="left sort text"><p></p></div>
-        <div class="right sort text"><p></p></div>
+      <div class="left sort text"><p>Misaki</p></div>
+      <div class="right sort text"><p>Marie Rose</p></div>
     </div>
 
     <div class="options"></div>
-    <div class="image selector">Display Images on Result: </div>
+    <div class="image selector">Photos in Result: </div>
     <div class="time taken"></div>
-    <div class="results"></div>
+    <div class="results" id="characters"></div>
 
-    <div class="info">
-        <a href="mailto:eonleader4@gmail.com">Contact</a> | <a href="https://github.com/execfera/charasort/">Source Code</a> | <a class="clearsave">Clear Save Data</a>
-        
-        <br><br>
+    <div class="info" id="about">
+      <section class="info-card info-card-pink">
+        <h2>How It Works</h2>
+        <p>Choose between two characters.</p>
+        <p>Pick the one you like better.</p>
+        <p>Repeat until a winner remains.</p>
+        <p>Your result saves automatically.</p>
+      </section>
 
-        <p>Sorter for Dead or Alive characters. Pick your sources, and hit the Start button.</p>
-        <p><strong>Certain options have details that you can hover to read.</strong></p>
-        <p>Click on the character you like better from the two, or tie them if you like them equally or don't know them.</p>
+      <section class="info-card info-card-cyan">
+        <h2>Keyboard Shortcuts</h2>
+        <dl>
+          <div><dt>Left Arrow</dt><dd>Pick left character</dd></div>
+          <div><dt>Right Arrow</dt><dd>Pick right character</dd></div>
+          <div><dt>Down Arrow</dt><dd>Undo last choice</dd></div>
+          <div><dt>S / Space</dt><dd>Save progress</dd></div>
+        </dl>
+      </section>
 
-        <br><br>
-
-        <p>Keyboard controls during sorting: H/LeftArrow (pick left) J/DownArrow (undo) L/RightArrow (pick right) S (save progress).</p>
-        <p>Before sorting: S/Enter (start sorting) L (load progress).
-        <p>1/2/3 always correspond to the first/second/third buttons.</p>
-        
-        <br><br>
-
-        <p>Source code courtesy of Frelia</p>
-
-        <br><br>
-
-        <p>25th August 2020 - First version.</p>
-      <p>25th January 2021 - Lobelia added.</p>
-	  <p>10th October 2023 - Nanami, Elise, Koharu, Amy, Shandy, and Yukino added.</p>
-	  <p>Removed "Tie" button for more brutal approach.</p>
-	  <p>21st July 2024 - Shizuku and Reika added. (Updated by Maasim)</p>
+      <section class="info-card info-card-violet" id="updates">
+        <h2>Links &amp; Data</h2>
+        <p><a href="mailto:eonleader4@gmail.com">Contact</a></p>
+        <p><a href="https://github.com/execfera/charasort/">Source Code</a></p>
+        <p><a class="clearsave">Clear Saved Data</a></p>
+        <p>Updated May 27, 2026 with Meg, Azusa, Nozomi, and the default DOAXVV filter.</p>
+      </section>
     </div>
+  </main>
 </div>
 </body>
 

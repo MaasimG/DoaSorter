@@ -6,13 +6,14 @@ dataSet[dataSetVersion].options = [
     name: "Filter by Series Entry",
     key: "series",
     tooltip: "Check this to restrict to certain series.",
-    checked: false,
+    checked: true,
     sub: [
-      { name: "Main cast", key: "DOA" },
-	  { name: "Xtreme", key: "XVV" },
-	  { name: "Include Secondary Characters", key: "DOS" },
-	  { name: "Include Final bosses", key: "DOF" },
-	  { name: "Include Guest characters", key: "DOG" },
+      { name: "Main Cast", key: "DOA", checked: false },
+	  { name: "Xtreme", key: "XVV", checked: false },
+	  { name: "DOAXVV", key: "DOAXVV", checked: true },
+	  { name: "Secondary Characters", key: "DOS", checked: false },
+	  { name: "Final Bosses", key: "DOF", checked: false },
+	  { name: "Guest Characters", key: "DOG", checked: false },
       
     ]
   }
@@ -23,7 +24,7 @@ dataSet[dataSetVersion].characterData = [
     name: "Kasumi",
     img: "IQD8tKe.png",
     opts: {
-      series: [ "DOA", "XVV" ]
+      series: [ "DOA", "XVV", "DOAXVV" ]
     }
   },
   {
@@ -51,7 +52,7 @@ dataSet[dataSetVersion].characterData = [
     name: "Leifang",
     img: "vCJFl1V.png",
     opts: {
-      series: [ "DOA", "XVV" ]
+      series: [ "DOA", "XVV", "DOAXVV" ]
     }
   },
   {
@@ -65,7 +66,7 @@ dataSet[dataSetVersion].characterData = [
     name: "Tina Armstrong",
     img: "HVlXnUj.png",
     opts: {
-      series: [ "DOA", "XVV" ]
+      series: [ "DOA", "XVV", "DOAXVV" ]
     }
   },
   {
@@ -86,14 +87,14 @@ dataSet[dataSetVersion].characterData = [
     name: "Ayane",
     img: "hTcm05v.png",
     opts: {
-      series: [ "DOA", "XVV" ]
+      series: [ "DOA", "XVV", "DOAXVV" ]
     }
   },
   {
     name: "Helena Douglas",
     img: "HBBDLYY.png",
     opts: {
-      series: [ "DOA", "XVV" ]
+      series: [ "DOA", "XVV", "DOAXVV" ]
     }
   },
   {
@@ -121,7 +122,7 @@ dataSet[dataSetVersion].characterData = [
     name: "Hitomi",
     img: "k0Gq8RH.png",
     opts: {
-      series: [ "DOA", "XVV" ]
+      series: [ "DOA", "XVV", "DOAXVV" ]
     }
   },
   {
@@ -149,7 +150,7 @@ dataSet[dataSetVersion].characterData = [
     name: "Kokoro",
     img: "LZX0aGZ.png",
     opts: {
-      series: [ "DOA", "XVV" ]
+      series: [ "DOA", "XVV", "DOAXVV" ]
     }
   },
   {
@@ -177,7 +178,7 @@ dataSet[dataSetVersion].characterData = [
     name: "Momiji",
     img: "4uvKMBq.png",
     opts: {
-      series: [ "DOA", "XVV" ]
+      series: [ "DOA", "XVV", "DOAXVV" ]
     }
   },
   {
@@ -191,7 +192,7 @@ dataSet[dataSetVersion].characterData = [
     name: "Marie Rose",
     img: "pCN6380.png",
     opts: {
-      series: [ "DOA", "XVV" ]
+      series: [ "DOA", "XVV", "DOAXVV" ]
     }
   },
   {
@@ -205,21 +206,21 @@ dataSet[dataSetVersion].characterData = [
     name: "Nyotengu",
     img: "i5r6eO3.png",
     opts: {
-      series: [ "DOA", "XVV" ]
+      series: [ "DOA", "XVV", "DOAXVV" ]
     }
   },
   {
     name: "Honoka",
     img: "6rMEqPq.png",
     opts: {
-      series: [ "DOA", "XVV" ]
+      series: [ "DOA", "XVV", "DOAXVV" ]
     }
   },
   {
     name: "Tamaki",
     img: "RTZEELX.png",
     opts: {
-      series: [ "DOA", "XVV" ]
+      series: [ "DOA", "XVV", "DOAXVV" ]
     }
   },
   {
@@ -289,63 +290,63 @@ dataSet[dataSetVersion].characterData = [
     name: "Misaki",
     img: "DPKMOLk.png?1",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
     }
   },
   {
     name: "Luna",
     img: "X0b9BAS.jpg",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
     }
   },
   {
     name: "Fiona",
     img: "RFLZTzw.png",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
     }
   },
   {
     name: "Nagisa",
     img: "YHadjCP.png",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
     }
   },
   {
     name: "Kanna",
     img: "AgIkgbL.png",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
     }
   },
   {
     name: "Monica",
     img: "RhxN6lW.png",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
     }
   },
   {
     name: "Sayuri",
     img: "0g7Xnhl.png",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
     }
   },
   {
     name: "Patty",
     img: "V97ZlUr.png",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
     }
   },
 {
     name: "Tsukushi",
     img: "SFE7GBq.png",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
     }
   },
   {
@@ -415,14 +416,14 @@ dataSet[dataSetVersion].characterData = [
     name: "Lobelia",
     img: "dT2jJJN.png",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
     }
   },
   {
     name: "Nanami",
     img: "tEaW41K.png",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
     }
   },
   
@@ -430,7 +431,7 @@ dataSet[dataSetVersion].characterData = [
     name: "Elise",
     img: "5oz1CEq.png",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
     }
   },
   
@@ -438,7 +439,7 @@ dataSet[dataSetVersion].characterData = [
     name: "Koharu",
     img: "sKiSoq6.png",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
     }
   },
   
@@ -446,7 +447,7 @@ dataSet[dataSetVersion].characterData = [
     name: "Amy",
     img: "OyYRI70.png",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
     }
   },
   
@@ -454,7 +455,7 @@ dataSet[dataSetVersion].characterData = [
     name: "Shandy",
     img: "ar6CwMN.png",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
     }
   },
   
@@ -462,7 +463,7 @@ dataSet[dataSetVersion].characterData = [
     name: "Yukino",
     img: "tDCYbz3.png",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
     }
   },
   
@@ -470,15 +471,39 @@ dataSet[dataSetVersion].characterData = [
     name: "Shizuku",
     img: "pdgRa3J.png",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
+    }
+  },
+  
+           {
+    name: "Reika",
+    img: "S9xxxdI.png",
+    opts: {
+      series: [ "XVV", "DOAXVV" ]
     }
   },
   
              {
-    name: "Reika",
-    img: "S9xxxdI.png",
+    name: "Meg",
+    img: "1EbNndA.png",
     opts: {
-      series: [ "XVV" ]
+      series: [ "XVV", "DOAXVV" ]
+    }
+  },
+  
+             {
+    name: "Azusa",
+    img: "GzyNkYh.png",
+    opts: {
+      series: [ "XVV", "DOAXVV" ]
+    }
+  },
+  
+             {
+    name: "Nozomi",
+    img: "GftUPXW.png",
+    opts: {
+      series: [ "XVV", "DOAXVV" ]
     }
   }
   
@@ -487,5 +512,3 @@ dataSet[dataSetVersion].characterData = [
   
   
 ];
-
-

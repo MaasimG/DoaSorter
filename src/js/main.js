@@ -52,6 +52,7 @@ let loading         = false;
 let totalBattles    = 0;
 let sorterURL       = window.location.host + window.location.pathname;
 let storedSaveType  = localStorage.getItem(`${sorterURL}_saveType`);
+let resultImageURL  = '';
 
 /** Initialize script. */
 function init() {
@@ -106,17 +107,22 @@ function init() {
   document.querySelector('.image.selector').insertAdjacentElement('beforeend', document.createElement('select'));
 
   /** Initialize image quantity selector for results. */
+  const allImages = document.createElement('option');
+  allImages.value = 'all';
+  allImages.text = 'All';
+  allImages.selected = 'selected';
+  document.querySelector('.image.selector > select').insertAdjacentElement('beforeend', allImages);
+
   for (let i = 0; i <= 10; i++) {
     const select = document.createElement('option');
     select.value = i;
     select.text = i;
-    if (i === 3) { select.selected = 'selected'; }
     document.querySelector('.image.selector > select').insertAdjacentElement('beforeend', select);
   }
 
   document.querySelector('.image.selector > select').addEventListener('input', (e) => {
     const imageNum = e.target.options[e.target.selectedIndex].value;
-    result(Number(imageNum));
+    result(imageNum === 'all' ? characterDataToSort.length : Number(imageNum));
   });
 
   /** Show load button if save data exists. */
@@ -466,9 +472,9 @@ function progressBar(indicator, percentage) {
 /**
  * Shows the result of the sorter.
  * 
- * @param {number} [imageNum=3] Number of images to display. Defaults to 3.
+ * @param {number} [imageNum=Infinity] Number of images to display. Defaults to all.
  */
-function result(imageNum = 3) {
+function result(imageNum = Infinity) {
   document.querySelectorAll('.finished.button').forEach(el => el.style.display = 'block');
   document.querySelector('.image.selector').style.display = 'block';
   document.querySelector('.time.taken').style.display = 'block';
@@ -483,7 +489,7 @@ function result(imageNum = 3) {
   const imgRes = (char, num) => {
     const charName = reduceTextWidth(char.name, 'Arial 12px', 160);
     const charTooltip = char.name !== charName ? char.name : '';
-    return `<div class="result image"><div class="left"><span>${num}</span></div><div class="right"><img src="${char.img}"><div><span title="${charTooltip}">${charName}</span></div></div></div>`;
+    return `<div class="result image"><div class="left"><span>${num}</span></div><div class="right"><img src="${char.img}" crossorigin="anonymous" referrerpolicy="no-referrer"><div><span title="${charTooltip}">${charName}</span></div></div></div>`;
   }
   const res = (char, num) => {
     const charName = reduceTextWidth(char.name, 'Arial 12px', 160);
@@ -499,6 +505,7 @@ function result(imageNum = 3) {
   const resultTable = document.querySelector('.results');
   const timeElem = document.querySelector('.time.taken');
 
+  finalCharacters = [];
   resultTable.innerHTML = header;
   timeElem.innerHTML = timeStr;
 
@@ -591,24 +598,69 @@ function generateImage() {
   const timeFinished = timestamp + timeTaken;
   const tzoffset = (new Date()).getTimezoneOffset() * 60000;
   const filename = 'sort-' + (new Date(timeFinished - tzoffset)).toISOString().slice(0, -5).replace('T', '(') + ').png';
+  const imgButton = document.querySelector('.finished.getimg.button');
+  const results = document.querySelector('.results');
+  const oldPreview = document.querySelector('.result.export');
 
-  html2canvas(document.querySelector('.results')).then(canvas => {
-    const dataURL = canvas.toDataURL();
-    const imgButton = document.querySelector('.finished.getimg.button');
-    const resetButton = document.createElement('a');
+  if (oldPreview) oldPreview.remove();
+  if (resultImageURL) {
+    URL.revokeObjectURL(resultImageURL);
+    resultImageURL = '';
+  }
 
-    imgButton.removeEventListener('click', generateImage);
-    imgButton.innerHTML = '';
-    imgButton.insertAdjacentHTML('beforeend', `<a href="${dataURL}" download="${filename}">Download Image</a><br><br>`);
+  imgButton.removeEventListener('click', generateImage);
+  imgButton.textContent = 'Preparing picture...';
 
-    resetButton.insertAdjacentText('beforeend', 'Reset');
-    resetButton.addEventListener('click', (event) => {
+  results.classList.add('is-exporting');
+  setTimeout(() => {
+    html2canvas(results, {
+      allowTaint: false,
+      backgroundColor: '#e7fdff',
+      onclone: clonedDoc => {
+        const style = clonedDoc.createElement('style');
+        style.textContent = `
+          *, *::before, *::after {
+            animation: none !important;
+            opacity: 1 !important;
+            transition: none !important;
+          }
+        `;
+        clonedDoc.head.appendChild(style);
+      },
+      scale: 2,
+      useCORS: true
+    }).then(canvas => {
+      results.classList.remove('is-exporting');
+      canvas.toBlob(blob => {
+        if (!blob) {
+          imgButton.textContent = 'Could not save picture';
+          imgButton.addEventListener('click', generateImage);
+          return;
+        }
+
+        resultImageURL = URL.createObjectURL(blob);
+
+        const exportPanel = document.createElement('div');
+        exportPanel.className = 'result export';
+        exportPanel.innerHTML = `
+          <div class="export.actions">
+            <a href="${resultImageURL}" download="${filename}">Download PNG</a>
+            <span>or right-click / long-press the preview below and save the image</span>
+          </div>
+          <img src="${resultImageURL}" alt="Rendered sorter result">
+        `;
+
+        document.querySelector('.time.taken').insertAdjacentElement('afterend', exportPanel);
+        imgButton.textContent = 'Regenerate Picture';
+        imgButton.addEventListener('click', generateImage);
+      }, 'image/png');
+    }).catch((err) => {
+      results.classList.remove('is-exporting');
+      console.error('Could not save result picture:', err);
+      imgButton.textContent = 'Could not save picture';
       imgButton.addEventListener('click', generateImage);
-      imgButton.innerHTML = 'Generate Image';
-      event.stopPropagation();
     });
-    imgButton.insertAdjacentElement('beforeend', resetButton);
-  });
+  }, 100);
 }
 
 function generateTextList() {
@@ -767,16 +819,26 @@ function preloadImages() {
   let imagesLoaded = 0;
 
   const loadImage = async (src) => {
-    const blob = await fetch(src).then(res => res.blob());
-    return new Promise((res, rej) => {
-      const reader = new FileReader();
-      reader.onload = ev => {
-        progressBar(`Loading Image ${++imagesLoaded}`, Math.floor(imagesLoaded * 100 / totalLength));
-        res(ev.target.result);
-      };
-      reader.onerror = rej;
-      reader.readAsDataURL(blob);
-    });
+    try {
+      const response = await fetch(src, {
+        mode: 'cors',
+        referrerPolicy: 'no-referrer'
+      });
+      const blob = await response.blob();
+      if (!response.ok || !blob.size || !blob.type.startsWith('image/')) {
+        throw new Error(`Image request returned ${response.status} ${blob.type || 'unknown type'}`);
+      }
+      return await new Promise((res, rej) => {
+        const reader = new FileReader();
+        reader.onload = ev => res(ev.target.result);
+        reader.onerror = rej;
+        reader.readAsDataURL(blob);
+      });
+    } catch (err) {
+      return src;
+    } finally {
+      progressBar(`Loading Image ${++imagesLoaded}`, Math.floor(imagesLoaded * 100 / totalLength));
+    }
   };
 
   return Promise.all(characterDataToSort.map(async (char, idx) => {
