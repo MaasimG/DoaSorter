@@ -615,7 +615,7 @@ function generateImage() {
   setTimeout(() => {
     html2canvas(results, {
       allowTaint: false,
-      backgroundColor: '#e7fdff',
+      backgroundColor: '#111827',
       onclone: clonedDoc => {
         const style = clonedDoc.createElement('style');
         style.textContent = `

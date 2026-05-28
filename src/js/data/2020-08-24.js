@@ -8,12 +8,12 @@ dataSet[dataSetVersion].options = [
     tooltip: "Check this to restrict to certain series.",
     checked: true,
     sub: [
-      { name: "Main Cast", key: "DOA", checked: false },
+      { name: "Main cast", key: "DOA", checked: false },
 	  { name: "Xtreme", key: "XVV", checked: false },
 	  { name: "DOAXVV", key: "DOAXVV", checked: true },
-	  { name: "Secondary Characters", key: "DOS", checked: false },
-	  { name: "Final Bosses", key: "DOF", checked: false },
-	  { name: "Guest Characters", key: "DOG", checked: false },
+	  { name: "Include Secondary Characters", key: "DOS", checked: false },
+	  { name: "Include Final bosses", key: "DOF", checked: false },
+	  { name: "Include Guest characters", key: "DOG", checked: false },
       
     ]
   }
